@@ -15,7 +15,6 @@ const MyUser = () => {
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
   const { data } = useUserByIdQuery(Number(currentUser.id));
-  console.log("🚀 ~ MyUser ~ data:", data);
 
   const handleLogout = async () => {
     const tokens = localStorage.getItem("tokens");
