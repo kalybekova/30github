@@ -1,7 +1,5 @@
-import React from "react";
+import Home from "@/appPages/site/components/pages/Home";
 
-const page = () => {
-  return <div>home</div>;
-};
+const page = () => <Home />;
 
 export default page;

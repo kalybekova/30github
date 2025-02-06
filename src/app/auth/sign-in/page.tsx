@@ -1,7 +1,5 @@
-import React from "react";
+import SignInPage from "@/appPages/auth/components/pages/SignInPage";
 
-const page = () => {
-  return <div>page</div>;
-};
+const page = () => <SignInPage />;
 
 export default page;
