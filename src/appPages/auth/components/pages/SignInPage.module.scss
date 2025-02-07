@@ -1,18 +1,67 @@
 .SignInPage {
-  width: 500px;
+  width: 400px;
   height: 500px;
-  border: 1px solid gray;
   padding: 50px 30px;
   .content {
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 30px;
+
     form {
+      width: 100%;
       display: flex;
       align-items: center;
       flex-direction: column;
       gap: 20px;
+
+      input {
+        width: 100%;
+        padding: 13px 15px;
+        border-radius: 8px;
+        border: 1px solid rgb(181, 177, 177);
+        background: rgba(237, 236, 236, 0.379);
+        outline: none;
+        color: black;
+        font-weight: 500;
+      }
+      a {
+        margin-left: auto;
+        color: #3797ef;
+        font-size: 14px;
+      }
+      button {
+        width: 100%;
+        padding: 13px;
+        text-align: center;
+        color: white;
+        background: #3797ef;
+        border-radius: 8px;
+        border: none;
+      }
+      h5 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        color: gray;
+        font-size: 10px;
+        margin: 10px 0;
+        width: 100%;
+        hr {
+          border: 0.3px solid rgb(213, 213, 213);
+          border-radius: 10px;
+          width: 120px;
+          transform: rotate(180deg);
+        }
+      }
+      p {
+        font-weight: 400;
+        color: gray;
+        a {
+          color: #3797ef;
+        }
+      }
     }
   }
 }
