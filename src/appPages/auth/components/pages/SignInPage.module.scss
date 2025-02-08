@@ -2,6 +2,8 @@
   width: 400px;
   height: 500px;
   padding: 50px 30px;
+  border: 1px solid rgb(210, 206, 206);
+  border-radius: 8px;
   .content {
     display: flex;
     align-items: center;
@@ -25,11 +27,7 @@
         color: black;
         font-weight: 500;
       }
-      a {
-        margin-left: auto;
-        color: #3797ef;
-        font-size: 14px;
-      }
+
       button {
         width: 100%;
         padding: 13px;
@@ -54,6 +52,12 @@
           width: 120px;
           transform: rotate(180deg);
         }
+      }
+
+      a {
+        text-align: center;
+        color: #3797ef;
+        font-size: 14px;
       }
       p {
         font-weight: 400;
