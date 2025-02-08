@@ -30,7 +30,6 @@ const SignInPage = () => {
               {...register("password")}
               placeholder="Password"
             />
-            <Link href="">Forgor password?</Link>
             <button type="submit">Log in</button>
 
             <h5>
@@ -38,6 +37,8 @@ const SignInPage = () => {
               OR
               <hr />
             </h5>
+
+            <Link href="">Forgor password?</Link>
 
             <p>
               Do not have an account? <Link href="/auth/sign-up">Sign up.</Link>

@@ -2,15 +2,33 @@ import { api as index } from "..";
 
 const api = index.injectEndpoints({
   endpoints: (build) => ({
-    user: build.query({
+    user: build.query<Auth.UserListRes, Auth.UserListReq>({
       query: () => ({
-        url: ``,
+        url: `/profile/`,
         method: "GET",
       }),
       providesTags: ["auth"],
     }),
 
-    logIn: build.mutation({
+    logIn: build.mutation<Auth.LogInRes, Auth.LogInReq>({
+      query: (data) => ({
+        url: `/login/`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["auth"],
+    }),
+
+    register: build.mutation<Auth.RegisterRes, Auth.RegistenReq>({
+      query: (data) => ({
+        url: `/register/`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["auth"],
+    }),
+
+    logOut: build.mutation({
       query: (data) => ({
         url: `/login/`,
         method: "POST",
@@ -21,4 +39,9 @@ const api = index.injectEndpoints({
   }),
 });
 
-export const { useLogInMutation } = api;
+export const {
+  useLogInMutation,
+  useRegisterMutation,
+  useUserQuery,
+  useLogOutMutation,
+} = api;
