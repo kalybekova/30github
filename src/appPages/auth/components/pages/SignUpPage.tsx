@@ -5,16 +5,18 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useState } from "react";
 import logo from "@/assets/Instagram Logo.svg";
+import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
   const [registerFunc] = useRegisterMutation();
   const [step, setStep] = useState(1);
-  const [error, setError] = useState<string | null>(null); // Ошибка для возраста
+  const [error, setError] = useState<string | null>(null);
   const { register, handleSubmit } = useForm<Register>();
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<Register> = async (data) => {
     if (step === 1) {
-      setStep(2); // Переход к проверке возраста
+      setStep(2);
     } else {
       const age = calculateAge(new Date(data.age));
       if (age < 13) {
@@ -22,7 +24,15 @@ const SignUpPage = () => {
       } else {
         setError(null);
         console.log("🚀 ~ User data:", data);
-        // registerFunc(data); // Отправка данных на сервер
+        try {
+          const res = await registerFunc(data); // Отправка данных на сервер
+          if (res) {
+            localStorage.setItem("tokens", JSON.stringify(res.data));
+            router.push("/");
+          }
+        } catch (error) {
+          console.error("Registration error:", error);
+        }
       }
     }
   };

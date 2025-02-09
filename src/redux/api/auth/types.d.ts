@@ -1,8 +1,14 @@
 namespace Auth {
-  type LogInRes = LogIn[];
+  type LogInRes = {
+    access: string;
+    refresh: string;
+  };
   type LogInReq = LogIn;
 
-  type RegisterRes = Register[];
+  type RegisterRes = {
+    access: string;
+    refresh: string;
+  };
   type RegistenReq = Register;
 
   type UserListRes = UserList[];
