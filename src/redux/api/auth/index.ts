@@ -30,7 +30,7 @@ const api = index.injectEndpoints({
 
     logOut: build.mutation({
       query: (data) => ({
-        url: `/login/`,
+        url: `/logout/`,
         method: "POST",
         body: data,
       }),
