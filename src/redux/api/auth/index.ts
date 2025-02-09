@@ -4,7 +4,7 @@ const api = index.injectEndpoints({
   endpoints: (build) => ({
     user: build.query<Auth.UserListRes, Auth.UserListReq>({
       query: () => ({
-        url: `/profile/`,
+        url: `/user/profile/`,
         method: "GET",
       }),
       providesTags: ["auth"],
@@ -12,7 +12,7 @@ const api = index.injectEndpoints({
 
     logIn: build.mutation<Auth.LogInRes, Auth.LogInReq>({
       query: (data) => ({
-        url: `/login/`,
+        url: `/user/login/`,
         method: "POST",
         body: data,
       }),
@@ -21,7 +21,7 @@ const api = index.injectEndpoints({
 
     register: build.mutation<Auth.RegisterRes, Auth.RegistenReq>({
       query: (data) => ({
-        url: `/register/`,
+        url: `/user/register/`,
         method: "POST",
         body: data,
       }),
@@ -30,7 +30,7 @@ const api = index.injectEndpoints({
 
     logOut: build.mutation({
       query: (data) => ({
-        url: `/logout/`,
+        url: `/user/logout/`,
         method: "POST",
         body: data,
       }),
