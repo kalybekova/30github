@@ -5,14 +5,24 @@ import logo from "@/assets/Instagram Logo.svg";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import { useLogInMutation } from "@/redux/api/auth";
+import { useRouter } from "next/navigation";
 
 const SignInPage = () => {
   const { register, handleSubmit } = useForm<LogIn>();
   const [logInFunc] = useLogInMutation();
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<LogIn> = async (data) => {
     console.log("🚀 ~ constonSubmit:SubmitHandler<LogIn>= ~ data:", data);
-    return await logInFunc(data);
+    try {
+      const res = await logInFunc(data);
+      if (res) {
+        localStorage.setItem("tokens", JSON.stringify(res.data));
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+    }
   };
   return (
     <section className={s.SignInPage}>
