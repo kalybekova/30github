@@ -1,0 +1,35 @@
+.SideBar {
+  width: 250px;
+  height: 90vh;
+
+  .content {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px;
+    a {
+      color: black;
+      width: 100%;
+    }
+    .block {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      gap: 10px;
+      padding: 8px;
+      border-radius: 5px;
+
+      span {
+        font-size: 20px;
+      }
+      h2 {
+        font-size: 18px;
+        font-weight: 400;
+      }
+    }
+    .block:hover {
+      background: rgba(194, 191, 191, 0.497);
+    }
+  }
+}

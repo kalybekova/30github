@@ -3,6 +3,7 @@ import { FC, ReactNode } from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import scss from "./LayoutSite.module.scss";
+import SideBar from "../pages/SideBar/SideBar";
 
 interface IProps {
   children: ReactNode;
@@ -11,9 +12,12 @@ interface IProps {
 const LayoutSite: FC<IProps> = ({ children }) => {
   return (
     <div className={scss.LayoutSite}>
-      <Header />
-      <main>{children}</main>
-      <Footer />
+      {/* <Header /> */}
+      <div className={scss.block}>
+        <SideBar />
+        <main>{children}</main>
+      </div>
+      {/* <Footer /> */}
     </div>
   );
 };

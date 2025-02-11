@@ -1,51 +1,79 @@
-import { GoHomeFill } from "react-icons/go";
-import { IoSearchSharp } from "react-icons/io5";
-import { FaCompass } from "react-icons/fa";
+import { GrHomeRounded } from "react-icons/gr";
+import { IoIosSearch } from "react-icons/io";
+import { SlCompass } from "react-icons/sl";
 import { TfiVideoClapper } from "react-icons/tfi";
-import { FaRegPlusSquare } from "react-icons/fa";
-import { FaUserAlt } from "react-icons/fa";
+import { CiSquarePlus } from "react-icons/ci";
+import { CiUser } from "react-icons/ci";
 import s from "./SideBAr.module.scss";
+import { GoHeart } from "react-icons/go";
+import { TbMessageCirclePlus } from "react-icons/tb";
+import Image from "next/image";
+import logo from "@/assets/Instagram Logo.svg";
+import Link from "next/link";
 
 const arr = [
   {
-    icon: <GoHomeFill />,
+    icon: <GrHomeRounded />,
     text: "Main",
+    active: false,
+    path: "/",
   },
   {
-    icon: <IoSearchSharp />,
+    icon: <IoIosSearch />,
     text: "Search query",
+    active: false,
+    path: "/search",
   },
   {
-    icon: <FaCompass />,
+    icon: <SlCompass />,
     text: "Interesting",
+    active: false,
+    path: "/interesting",
   },
   {
     icon: <TfiVideoClapper />,
     text: "Reels",
+    active: false,
+    path: "/reels",
   },
   {
-    icon: <GoHomeFill />,
+    icon: <TbMessageCirclePlus />,
     text: "Message",
+    active: false,
+    path: "/message",
   },
   {
-    icon: <FaRegPlusSquare />,
+    icon: <CiSquarePlus />,
     text: "Create",
+    active: false,
+    path: "/create",
   },
   {
-    icon: <FaUserAlt />,
+    icon: <GoHeart />,
+    text: "Notification",
+    active: false,
+    path: "/notification",
+  },
+  {
+    icon: <CiUser />,
     text: "Profile",
+    active: false,
+    path: "/profile",
   },
 ];
 
 const SideBar = () => {
   return (
-    <section>
+    <section className={s.SideBar}>
       <div className={s.content}>
+        <Image src={logo} alt="logo" />
         {arr.map((el, idx) => (
-          <div key={idx} className={s.block}>
-            <span>{el.icon}</span>
-            <h2>{el.text}</h2>
-          </div>
+          <Link key={idx} href={el.path}>
+            <div className={s.block}>
+              <span>{el.icon}</span>
+              <h2>{el.text}</h2>
+            </div>
+          </Link>
         ))}
       </div>
     </section>

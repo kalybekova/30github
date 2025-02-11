@@ -1,10 +1,13 @@
 "use client";
 
-import { useUserQuery } from "@/redux/api/auth";
+import { useLogOutMutation, useUserQuery } from "@/redux/api/auth";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const MyUser = () => {
   const { data: users } = useUserQuery();
+  const [logoutUser] = useLogOutMutation();
+  const router = useRouter();
 
   const tokens = localStorage.getItem("tokens");
   let userId = null;
@@ -26,7 +29,29 @@ const MyUser = () => {
 
   const currentUser = users?.find((user) => user.id === userId);
 
-  return <div>{currentUser?.username}</div>;
+  const handleLogout = async () => {
+    const tokens = localStorage.getItem("tokens");
+    if (!tokens) {
+      console.error("Ошибка: нет токенов в localStorage.");
+      return;
+    }
+
+    const accessToken = JSON.parse(tokens).access;
+
+    try {
+      await logoutUser({ access: accessToken }).unwrap(); // Отправляешь токен на сервер
+      localStorage.removeItem("tokens");
+      router.push("/"); // Перенаправление на страницу логина
+    } catch (error) {
+      console.error("Ошибка при выходе:", error);
+    }
+  };
+  return (
+    <div>
+      {currentUser ? currentUser?.username : "anonim"}
+      <button onClick={handleLogout}>Logout</button>
+    </div>
+  );
 };
 
 export default MyUser;
