@@ -19,3 +19,12 @@ interface UserList {
   username: string;
   profile_picture: string;
 }
+
+interface Post {
+  description: string;
+  author: number;
+  post: {
+    id: number;
+    img: string;
+  }[];
+}

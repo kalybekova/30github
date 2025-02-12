@@ -29,6 +29,6 @@ export const api = createApi({
 
   refetchOnFocus: true,
   refetchOnReconnect: true,
-  tagTypes: ["auth"],
+  tagTypes: ["auth", "post"],
   endpoints: () => ({}),
 });

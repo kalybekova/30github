@@ -10,6 +10,8 @@ import { TbMessageCirclePlus } from "react-icons/tb";
 import Image from "next/image";
 import logo from "@/assets/Instagram Logo.svg";
 import Link from "next/link";
+import { useUserQuery } from "@/redux/api/auth";
+import { findCurrentUser, getUserData } from "@/utils/MyData";
 
 const arr = [
   {
@@ -54,15 +56,14 @@ const arr = [
     active: false,
     path: "/notification",
   },
-  {
-    icon: <CiUser />,
-    text: "Profile",
-    active: false,
-    path: "/profile",
-  },
 ];
 
 const SideBar = () => {
+  const { data: users } = useUserQuery();
+
+  const { userId } = getUserData();
+  const currentUser = findCurrentUser(users, userId);
+
   return (
     <section className={s.SideBar}>
       <div className={s.content}>
@@ -75,6 +76,19 @@ const SideBar = () => {
             </div>
           </Link>
         ))}
+        <Link href="profile">
+          <div className={s.block}>
+            <span>
+              {currentUser?.profile_picture ? (
+                <img src={currentUser.profile_picture} alt="photo" />
+              ) : (
+                <CiUser />
+              )}
+            </span>
+
+            <h2>{currentUser.username} </h2>
+          </div>
+        </Link>
       </div>
     </section>
   );
