@@ -15,7 +15,6 @@ const CreatePost = () => {
   const { register, handleSubmit } = useForm<Post>();
 
   const [file, setFile] = useState<File | null>(null);
-  console.log("🚀 ~ CreatePost ~ file:", file);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -25,18 +24,24 @@ const CreatePost = () => {
   };
 
   const onSubmit: SubmitHandler<Post> = async (data) => {
-    if (!file) {
-      console.error("File is required");
+    // Создаем FormData
+    const formData = new FormData();
+
+    // Добавляем описание
+    formData.append("description", data.description);
+
+    // Добавляем ID автора
+    formData.append("author", String(currentUser.id));
+
+    // Если файл выбран, добавляем его с правильным ключом
+    if (file) {
+      formData.append("post[0][img]", file); // Добавляем файл с индексом 0
+    } else {
+      console.error("No file selected");
       return;
     }
 
-    const formData = new FormData();
-
-    formData.append("description", data.description);
-    formData.append("author", String(currentUser.id));
-
-    formData.append("post[0][img]", file);
-
+    // Отправка запроса с использованием axios
     try {
       const response = await axios.post(
         "http://16.171.165.128/post/post_create/",
@@ -47,9 +52,9 @@ const CreatePost = () => {
           },
         }
       );
-      console.log("Post created successfully:", response.data);
+      console.log("Server Response:", response.data);
     } catch (error) {
-      console.error("Error occurred:", error);
+      console.error("Error:", error);
     }
   };
 
