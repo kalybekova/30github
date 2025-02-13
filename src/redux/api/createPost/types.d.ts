@@ -1,16 +1,10 @@
 namespace Post {
-  export interface PostCreateReq {
-    description: string;
-    author: number;
-    img: File; // File, потому что это бинарный файл
-  }
+  type PostCreateRes = Post[];
+  type PostCreateReq = Post;
 
-  export interface PostCreateRes {
-    description: string;
-    author: number;
-    post: {
-      id: number;
-      img: string; // URL файла в ответе
-    }[];
-  }
+  type GetPostRes = GetPost[];
+  type GetPostReq = GetPost;
+
+  type UserByIdRes = UserById;
+  type UserByIdReq = number;
 }

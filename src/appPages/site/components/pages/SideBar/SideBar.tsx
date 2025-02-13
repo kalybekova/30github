@@ -76,7 +76,7 @@ const SideBar = () => {
             </div>
           </Link>
         ))}
-        <Link href="profile">
+        <Link href={`/${currentUser.id}`}>
           <div className={s.block}>
             <span>
               {currentUser?.profile_picture ? (
