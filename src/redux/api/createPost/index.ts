@@ -2,9 +2,9 @@ import { api as index } from "..";
 
 const api = index.injectEndpoints({
   endpoints: (build) => ({
-    postPostCreate: build.mutation<Post.PostCreateRes, Post.PostCreateReq>({
+    postPostCreate: build.mutation<Post.PostCreateRes, FormData>({
       query: (data) => ({
-        ur: "/post/post_create/",
+        url: "/post/post_create/",
         method: "POST",
         body: data,
       }),
