@@ -40,7 +40,6 @@ interface GetPost {
     img: string;
   }>;
 }
-
 interface UserById {
   username: string;
   email: string;

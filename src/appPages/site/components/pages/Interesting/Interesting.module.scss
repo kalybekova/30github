@@ -1,0 +1,19 @@
+.Interesting {
+  padding: 0 70px;
+  width: 100%;
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+    flex-wrap: wrap;
+    .block {
+      img {
+        width: 350px;
+        height: 350px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+    }
+  }
+}
