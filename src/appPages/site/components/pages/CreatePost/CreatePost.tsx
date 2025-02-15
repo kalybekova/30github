@@ -51,7 +51,7 @@ const CreatePost = () => {
 
       // Теперь отправляем текстовое описание
       const postTextResponse = await postTextMut({
-        post_connect: postResponse.id, // ID фото, которое было отправлено
+        post_connect: postResponse.id,
         text: text,
       }).unwrap();
       console.log("Text post created successfully:", postTextResponse);

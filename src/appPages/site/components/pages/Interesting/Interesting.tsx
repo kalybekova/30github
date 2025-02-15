@@ -10,7 +10,7 @@ const Interesting = () => {
       <div className={s.content}>
         {data?.map((item) => (
           <div key={item.id} className={s.block}>
-            <img src={item.post[0].img} alt="" />
+            <img src={item.post_connect.post_img1} alt="" />
           </div>
         ))}
       </div>
