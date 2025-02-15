@@ -10,7 +10,7 @@ const api = index.injectEndpoints({
       providesTags: ["post"],
     }),
 
-    postPostCreate: build.mutation<Post.PostCreateRes, FormData>({
+    postPostCreate: build.mutation<Post.PostCreateRes, PostCreateReq>({
       query: (data) => ({
         url: "/post/post_create/",
         method: "POST",
@@ -19,9 +19,9 @@ const api = index.injectEndpoints({
       invalidatesTags: ["post"],
     }),
 
-    postContent: build.mutation({
+    postContent: build.mutation<Post.GetPostImgRes, Post.GetPostImgReq>({
       query: (data) => ({
-        url: "/post/content_create/",
+        url: "/post/post_img/create/",
         method: "POST",
         body: data,
       }),
