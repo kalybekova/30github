@@ -1,6 +1,5 @@
 "use client";
 import {
-  useGetAllPostQuery,
   usePostContentMutation,
   usePostPostCreateMutation,
 } from "@/redux/api/createPost";
@@ -15,82 +14,71 @@ const CreatePost = () => {
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
 
-  const [postPostCreateMut] = usePostPostCreateMutation(); // Для создания поста
-  const [postContentMut] = usePostContentMutation(); // Для создания контента поста
-  // const { data: resData } = useGetAllPostQuery();
+  const [postContentMut] = usePostContentMutation<Post>();
+  const [postTextMut] = usePostPostCreateMutation<PostText>();
 
-  const { register, handleSubmit } = useForm<Post>();
-  const [file, setFile] = useState<File | null>(null);
+  const { handleSubmit, register } = useForm<Post>();
+
+  const [files, setFiles] = useState<File[]>([]);
+  const [text, setText] = useState<string>("");
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-    if (selectedFile) {
-      setFile(selectedFile);
+    if (event.target.files) {
+      setFiles(Array.from(event.target.files));
     }
   };
-  let img = "";
 
-  const onSubmit: SubmitHandler<Post> = async (data) => {
-    if (!file) {
-      console.error("No file selected");
+  const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(event.target.value);
+  };
+
+  const onSubmit: SubmitHandler<Post> = async () => {
+    if (files.length === 0) {
+      alert("Please select at least one image.");
       return;
     }
 
-    // try {
-    //   const toBase64 = (file: File) =>
-    //     new Promise<string>((resolve, reject) => {
-    //       const reader = new FileReader();
-    //       reader.readAsDataURL(file);
-    //       reader.onload = () => resolve(reader.result as string);
-    //       reader.onerror = (error) => reject(error);
-    //     });
+    try {
+      const formData = new FormData();
+      formData.append("author", currentUser.id.toString());
 
-    //   let base64Image = await toBase64(file);
-    //   base64Image = base64Image.split(",")[1]; // Убираем префикс
-    //   img = base64Image;
+      files.forEach((file, index) => {
+        formData.append(`post_img${index + 1}`, file);
+      });
 
-    //   // Создаем FormData
-    //   const formData = new FormData();
-    //   formData.append("description", data.description);
-    //   formData.append("author", currentUser.id);
-    //   formData.append("img", base64Image); // Отправляем строку Base64 без префикса
+      const postResponse = await postContentMut(formData).unwrap();
+      console.log("Post created successfully:", postResponse);
 
-    //   for (let [key, value] of formData.entries()) {
-    //     console.log(`${key}: ${value}`);
-    //   }
+      // Теперь отправляем текстовое описание
+      const postTextResponse = await postTextMut({
+        post_connect: postResponse.id, // ID фото, которое было отправлено
+        text: text,
+      }).unwrap();
+      console.log("Text post created successfully:", postTextResponse);
 
-    //   const postResponse = await postPostCreateMut(formData).unwrap();
-    //   console.log("Post created successfully:", postResponse);
-    //   alert("Post created successfully!");
-    // } catch (error: any) {
-    //   if (error.response) {
-    //     console.error("Error Status:", error.response.status);
-    //     console.error("Error Data:", error.response.data);
-    //     alert(
-    //       `Error ${error.response.status}: ${JSON.stringify(
-    //         error.response.data
-    //       )}`
-    //     );
-    //   } else {
-    //     console.error("Network Error:", error.message);
-    //     alert("Network error occurred. Please try again.");
-    //   }
-    // }
+      alert("Post created successfully!");
+    } catch (error: any) {
+      console.error("Error:", error);
+      alert("Error occurred. Check console.");
+    }
   };
 
   return (
     <section className={s.CreatePost}>
       <div className={s.content}>
         <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-          <input
-            type="text"
-            {...register("description", { required: true })}
-            placeholder="Description"
+          <input type="file" multiple onChange={handleFileChange} required />
+
+          {/* Добавляем поле для ввода текста */}
+          <textarea
+            value={text}
+            onChange={handleTextChange}
+            placeholder="Add a description"
+            required
           />
-          <input type="file" onChange={handleFileChange} required />
+
           <button type="submit">Share</button>
         </form>
-        {file && <img src={URL.createObjectURL(file)} alt="Preview" />}
       </div>
     </section>
   );

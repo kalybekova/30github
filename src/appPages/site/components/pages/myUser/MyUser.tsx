@@ -10,12 +10,11 @@ const MyUser = () => {
   const { data: users } = useUserQuery();
   const [logoutUser] = useLogOutMutation();
   const router = useRouter();
-  const id = useParams();
-  const { data } = useUserByIdQuery(Number(id));
-  console.log("🚀 ~ MyUser ~ data:", data);
+  // const id = useParams();
+  // const { data } = useUserByIdQuery(Number(id));
 
-  // const { userId } = getUserData();
-  // const currentUser = findCurrentUser(users, userId);
+  const { userId } = getUserData();
+  const currentUser = findCurrentUser(users, userId);
 
   const handleLogout = async () => {
     const tokens = localStorage.getItem("tokens");
@@ -41,8 +40,8 @@ const MyUser = () => {
           <div>{/* <Image src={} alt="photo" /> */}</div>
         </div>
       </div>
-      {/* {currentUser ? currentUser?.username : "anonim"}
-      <button onClick={handleLogout}>Logout</button> */}
+      {currentUser ? currentUser?.username : "anonim"}
+      <button onClick={handleLogout}>Logout</button>
     </section>
   );
 };
