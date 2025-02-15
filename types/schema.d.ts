@@ -41,17 +41,22 @@ interface PostText {
 
 interface GetPost {
   id: number;
-  author: {
+  post_connect: {
     id: number;
-    username: string;
-    profile_picture: string;
+    post_img1: string;
+    post_img2: any;
+    post_img3: any;
+    post_img4: any;
+    post_img5: any;
+    post_img6: any;
+    post_img7: any;
+    post_img8: any;
+    post_img9: any;
+    post_img10: any;
+    author: number;
   };
+  text: string;
   created_date: string;
-  description: string;
-  post: Array<{
-    id: number;
-    img: string;
-  }>;
 }
 interface UserById {
   username: string;

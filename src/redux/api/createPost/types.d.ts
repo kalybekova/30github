@@ -6,7 +6,7 @@ namespace Post {
   type GetPostReq = GetPost;
 
   type GetPostImgRes = {
-    id: any;
+    id: number;
     post_img1: string;
     post_img2: string;
     post_img3: string;
