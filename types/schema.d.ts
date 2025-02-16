@@ -63,16 +63,11 @@ interface UserById {
   email: string;
   first_name: string;
   last_name: string;
-  phone_number: string;
-  profile_picture: string;
+  phone_number: any;
+  profile_picture: any;
   status_acc: string;
-  age: string;
-  bio: string;
+  age: any;
+  bio: any;
   gender: string;
-  network: Array<{
-    id: number;
-    network_name: string;
-    network_link: string;
-    user_connect: number;
-  }>;
+  network: Array<any>;
 }

@@ -1,3 +1,4 @@
+"use client";
 import { GrHomeRounded } from "react-icons/gr";
 import { IoIosSearch } from "react-icons/io";
 import { SlCompass } from "react-icons/sl";
@@ -12,6 +13,9 @@ import logo from "@/assets/Instagram Logo.svg";
 import Link from "next/link";
 import { useUserQuery } from "@/redux/api/auth";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
+import user from "@/assets/user.png";
+import { useModal } from "@/provider/modalProvider";
+import CreatingPublication from "../CreatePost/CreatingPuclication/CreatingPublication";
 
 const arr = [
   {
@@ -48,7 +52,8 @@ const arr = [
     icon: <CiSquarePlus />,
     text: "Create",
     active: false,
-    path: "/create",
+    path: "",
+    modal: <CreatingPublication />,
   },
   {
     icon: <GoHeart />,
@@ -60,6 +65,7 @@ const arr = [
 
 const SideBar = () => {
   const { data: users } = useUserQuery();
+  const { openModal } = useModal();
 
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
@@ -70,7 +76,7 @@ const SideBar = () => {
         <Image src={logo} alt="logo" />
         {arr.map((el, idx) => (
           <Link key={idx} href={el.path}>
-            <div className={s.block}>
+            <div className={s.block} onClick={() => openModal(el.modal)}>
               <span>{el.icon}</span>
               <h2>{el.text}</h2>
             </div>
@@ -80,9 +86,9 @@ const SideBar = () => {
           <div className={s.block}>
             <span>
               {currentUser?.profile_picture ? (
-                <img src={currentUser.profile_picture} alt="photo" />
+                <Image src={currentUser.profile_picture} alt="photo" />
               ) : (
-                <CiUser />
+                <Image src={user} alt="photo" width={25} height={25} />
               )}
             </span>
 

@@ -2,19 +2,20 @@
 
 import { useLogOutMutation, useUserQuery } from "@/redux/api/auth";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import s from "./MyUser.module.scss";
 import Image from "next/image";
 import { useUserByIdQuery } from "@/redux/api/createPost";
+import user from "@/assets/user.png";
 const MyUser = () => {
   const { data: users } = useUserQuery();
   const [logoutUser] = useLogOutMutation();
   const router = useRouter();
-  // const id = useParams();
-  // const { data } = useUserByIdQuery(Number(id));
 
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
+  const { data } = useUserByIdQuery(Number(currentUser.id));
+  console.log("🚀 ~ MyUser ~ data:", data);
 
   const handleLogout = async () => {
     const tokens = localStorage.getItem("tokens");
@@ -36,9 +37,24 @@ const MyUser = () => {
   return (
     <section className={s.MyUser}>
       <div className={s.content}>
-        <div>
-          <div>{/* <Image src={} alt="photo" /> */}</div>
+        <div className={s.header}>
+          <div className={s.blockImg}>
+            <Image
+              src={data?.profile_picture || user}
+              alt="photo"
+              width={150}
+              height={150}
+            />
+          </div>
+          <div className={s.blockText}>
+            <h3>{data?.username}</h3>
+            <button>Edit profile</button>
+          </div>
         </div>
+      </div>
+
+      <div className={s.box}>
+        <div className={s.publication}>{/* <img src={data?.} alt="" /> */}</div>
       </div>
       {currentUser ? currentUser?.username : "anonim"}
       <button onClick={handleLogout}>Logout</button>

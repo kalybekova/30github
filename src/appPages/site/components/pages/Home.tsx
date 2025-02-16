@@ -6,9 +6,7 @@ const Home = () => {
   return (
     <div className={s.Home}>
       <div className="container">
-        <div>
-          <MyUser />
-        </div>
+        <div>Home</div>
       </div>
     </div>
   );
