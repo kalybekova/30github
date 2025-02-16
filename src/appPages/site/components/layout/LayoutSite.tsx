@@ -5,6 +5,7 @@ import SideBar from "../pages/SideBar/SideBar";
 import { useUserQuery } from "@/redux/api/auth";
 import SignInPage from "@/appPages/auth/components/pages/SignInPage";
 import { getUserData, findCurrentUser } from "@/utils/MyData";
+import { ModalProvider } from "@/provider/modalProvider";
 
 interface IProps {
   children: ReactNode;
@@ -13,24 +14,23 @@ interface IProps {
 const LayoutSite: FC<IProps> = ({ children }) => {
   const { data: users } = useUserQuery();
   const { userId } = getUserData();
-  const currentUser = findCurrentUser(users, userId); // Ищем текущего пользователя
+  const currentUser = findCurrentUser(users, userId);
 
   return (
-    <div className={scss.LayoutSite}>
-      {/* <Header /> */}
-      {currentUser ? (
-        <div className={scss.block}>
-          <SideBar />
-          <main>{children}</main>
-        </div>
-      ) : (
-        <div className={scss.auth}>
-          <SignInPage />
-        </div>
-      )}
-
-      {/* <Footer /> */}
-    </div>
+    <ModalProvider>
+      <div className={scss.LayoutSite}>
+        {currentUser ? (
+          <div className={scss.block}>
+            <SideBar />
+            <main>{children}</main>
+          </div>
+        ) : (
+          <div className={scss.auth}>
+            <SignInPage />
+          </div>
+        )}
+      </div>
+    </ModalProvider>
   );
 };
 
