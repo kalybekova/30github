@@ -70,7 +70,6 @@ const CreatePost = () => {
         <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <input type="file" multiple onChange={handleFileChange} required />
 
-          {/* Добавляем поле для ввода текста */}
           <textarea
             value={text}
             onChange={handleTextChange}
