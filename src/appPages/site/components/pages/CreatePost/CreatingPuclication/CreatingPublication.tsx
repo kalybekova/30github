@@ -12,6 +12,14 @@ import {
   usePostPostCreateMutation,
 } from "@/redux/api/createPost";
 import { SubmitHandler, useForm } from "react-hook-form";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination } from "swiper/modules";
+import user from "@/assets/user.png";
+import EmojiInput from "@/ui/Emoji/Emoji";
 
 const CreatingPublication = () => {
   const { openModal } = useModal();
@@ -27,9 +35,9 @@ const CreatingPublication = () => {
   const [files, setFiles] = useState<File[]>([]);
   const [text, setText] = useState<string>("");
 
-  const fileInputRef = useRef<HTMLInputElement>(null); // Создаём ссылку на input
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [step, setStep] = useState(1); // Управление шагами
+  const [step, setStep] = useState(1);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -37,7 +45,7 @@ const CreatingPublication = () => {
     }
   };
   const handleFileClick = () => {
-    fileInputRef.current?.click(); // Симулируем клик по input
+    fileInputRef.current?.click();
   };
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -61,7 +69,6 @@ const CreatingPublication = () => {
       const postResponse = await postContentMut(formData).unwrap();
       console.log("Post created successfully:", postResponse);
 
-      // Теперь отправляем текстовое описание
       const postTextResponse = await postTextMut({
         post_connect: postResponse.id,
         text: text,
@@ -75,14 +82,15 @@ const CreatingPublication = () => {
     }
   };
 
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, 3)); // Переключение вперёд
-  const prevStep = () => setStep((prev) => Math.max(prev - 1, 1)); // Переключение назад
+  const nextStep = () => setStep((prev) => Math.min(prev + 1, 3));
+  const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
   return ReactDOM.createPortal(
     <section className={s.modal}>
       <div className={s.block}>
         <h3>
           Creating a publication <hr />
+          <EmojiInput />
         </h3>
         <div className={s.content}>
           {step === 1 && (
@@ -108,8 +116,69 @@ const CreatingPublication = () => {
             </>
           )}
 
-          {step === 2 && <h2>Step 2: Edit your photo</h2>}
-          {step === 3 && <h2>Step 3: Write a caption</h2>}
+          {step === 2 && (
+            <Swiper
+              // navigation={{
+              //   hideOnClick: true,
+              // }}
+              // navigation
+              pagination={{ clickable: true }} // Точки снизу
+              modules={[Navigation, Pagination]}
+              slidesPerView={1}
+              className={s.imageSlider}
+            >
+              {files.map((file, index) => (
+                <SwiperSlide key={index}>
+                  <Image
+                    src={URL.createObjectURL(file)}
+                    alt={`Uploaded image ${index + 1}`}
+                    width={500}
+                    height={500}
+                    className={s.previewImage}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
+          {step === 3 && (
+            <div className={s.box}>
+              <div className={s.imgBlock}>
+                <Swiper
+                  navigation={{
+                    hideOnClick: true,
+                  }}
+                  pagination={{ clickable: true }} // Точки снизу
+                  modules={[Navigation, Pagination]}
+                  slidesPerView={1}
+                  className={s.imageSlider}
+                >
+                  {files.map((file, index) => (
+                    <SwiperSlide key={index}>
+                      <Image
+                        src={URL.createObjectURL(file)}
+                        alt={`Uploaded image ${index + 1}`}
+                        width={500}
+                        height={500}
+                        className={s.previewImage}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+              <div className={s.textBlock}>
+                <div className={s.head}>
+                  <Image
+                    src={currentUser.profile_picture || user}
+                    alt="photo"
+                    width={25}
+                    height={25}
+                  />
+                  <h2>{currentUser.username}</h2>
+                </div>
+                <textarea></textarea>
+              </div>
+            </div>
+          )}
 
           <div className={s.navigation}>
             {step > 1 && <button onClick={prevStep}>Back</button>}

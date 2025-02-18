@@ -33,6 +33,30 @@
       margin-top: 80px;
       gap: 20px;
 
+      .imageSlider {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border-radius: 12px;
+
+        :global(.swiper-pagination-bullet) {
+          background-color: white !important;
+          opacity: 0.5;
+        }
+
+        :global(.swiper-pagination-bullet-active) {
+          background-color: blue !important;
+          opacity: 1;
+        }
+
+        .previewImage {
+          object-fit: cover;
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+        }
+      }
+
       span {
         font-size: 100px;
       }
