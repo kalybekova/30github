@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
-import { FaSmile } from "react-icons/fa";
+import { MdOutlineEmojiEmotions } from "react-icons/md";
 
 const EmojiInput = () => {
   const [text, setText] = useState("");
@@ -31,14 +31,22 @@ const EmojiInput = () => {
           background: "none",
           border: "none",
           cursor: "pointer",
+          color: "black",
         }}
       >
-        <FaSmile size={20} />
+        <MdOutlineEmojiEmotions size={20} />
       </button>
 
       {/* Эмодзи-пикер */}
       {showPicker && (
-        <div style={{ position: "absolute", top: "40px", right: "0px" }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "40px",
+            right: "0px",
+            height: "200px",
+          }}
+        >
           <EmojiPicker onEmojiClick={handleEmojiClick} />
         </div>
       )}

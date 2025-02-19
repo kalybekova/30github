@@ -8,7 +8,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
 import { useUserQuery } from "@/redux/api/auth";
 import { useState } from "react";
-import CreatingPublication from "./CreatingPuclication/CreatingPublication";
 
 const CreatePost = () => {
   const { data: users } = useUserQuery();
