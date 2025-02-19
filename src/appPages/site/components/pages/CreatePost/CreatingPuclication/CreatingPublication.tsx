@@ -72,6 +72,7 @@ const CreatingPublication = () => {
       const postTextResponse = await postTextMut({
         post_connect: postResponse.id,
         text: text,
+        author: currentUser.id,
       }).unwrap();
       console.log("Text post created successfully:", postTextResponse);
 
@@ -88,10 +89,12 @@ const CreatingPublication = () => {
   return ReactDOM.createPortal(
     <section className={s.modal}>
       <div className={s.block}>
-        <h3>
-          Creating a publication <hr />
-          <EmojiInput />
-        </h3>
+        <div className={s.navigation}>
+          {step > 1 ? <button onClick={prevStep}>Back</button> : <h2></h2>}
+          <h3>Creating a publication</h3>
+          {step < 3 ? <button onClick={nextStep}>Next</button> : <h2></h2>}
+        </div>
+
         <div className={s.content}>
           {step === 1 && (
             <>
@@ -144,9 +147,9 @@ const CreatingPublication = () => {
             <div className={s.box}>
               <div className={s.imgBlock}>
                 <Swiper
-                  navigation={{
-                    hideOnClick: true,
-                  }}
+                  // navigation={{
+                  //   hideOnClick: true,
+                  // }}
                   pagination={{ clickable: true }} // Точки снизу
                   modules={[Navigation, Pagination]}
                   slidesPerView={1}
@@ -175,15 +178,14 @@ const CreatingPublication = () => {
                   />
                   <h2>{currentUser.username}</h2>
                 </div>
-                <textarea></textarea>
+                <textarea onChange={(e) => setText(e.target.value)}></textarea>
+                <button onClick={handleSubmit(onSubmit)} type="submit">
+                  share
+                </button>
+                <EmojiInput />
               </div>
             </div>
           )}
-
-          <div className={s.navigation}>
-            {step > 1 && <button onClick={prevStep}>Back</button>}
-            {step < 3 && <button onClick={nextStep}>Next</button>}
-          </div>
         </div>
       </div>
     </section>,
