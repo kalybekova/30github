@@ -1,29 +1,62 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 
-const EmojiInput = () => {
-  const [text, setText] = useState("");
+const EmojiInput = ({
+  text,
+  setText,
+}: {
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   const [showPicker, setShowPicker] = useState(false);
+  const pickerRef = useRef<HTMLDivElement>(null);
 
-  // Добавляем эмодзи в текстовое поле
   const handleEmojiClick = (emojiData: EmojiClickData) => {
     setText((prev) => prev + emojiData.emoji);
+    setShowPicker(false); // Закрываем после выбора эмодзи
   };
 
+  // Закрытие при клике вне
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        pickerRef.current &&
+        !pickerRef.current.contains(event.target as Node)
+      ) {
+        setShowPicker(false);
+      }
+    };
+
+    if (showPicker) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showPicker]);
+
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
-      {/* Поле ввода */}
-      <input
-        type="text"
+    <div
+      style={{
+        position: "relative",
+        display: "inline-block",
+        zIndex: 30,
+        width: "100% ",
+      }}
+    >
+      <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Type a message..."
-        style={{ padding: "8px", width: "250px" }}
-      />
-
-      {/* Кнопка для открытия эмодзи-пикера */}
+        style={{
+          width: "100%",
+          height: "100px",
+          border: "none",
+          outline: "none",
+        }}
+      ></textarea>
       <button
         onClick={() => setShowPicker(!showPicker)}
         style={{
@@ -36,14 +69,13 @@ const EmojiInput = () => {
       >
         <MdOutlineEmojiEmotions size={20} />
       </button>
-
-      {/* Эмодзи-пикер */}
       {showPicker && (
         <div
+          ref={pickerRef}
           style={{
             position: "absolute",
             top: "40px",
-            right: "0px",
+            left: "-60px",
             height: "200px",
           }}
         >
