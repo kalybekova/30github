@@ -40,8 +40,11 @@ const CreatingPublication = () => {
   const [step, setStep] = useState(1);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
+    if (event.target.files && event.target.files.length > 0) {
       setFiles(Array.from(event.target.files));
+      setStep(2); // Переход на следующий шаг
+    } else {
+      alert("Please select at least one image.");
     }
   };
   const handleFileClick = () => {
@@ -92,12 +95,16 @@ const CreatingPublication = () => {
         <div className={s.navigation}>
           {step > 1 ? <button onClick={prevStep}>Back</button> : <h2></h2>}
           <h3>Creating a publication</h3>
-          {step < 3 ? <button onClick={nextStep}>Next</button> : <h2></h2>}
+          {step !== 1 && step < 3 ? (
+            <button onClick={nextStep}>Next</button>
+          ) : (
+            <h2></h2>
+          )}
         </div>
 
         <div className={s.content}>
           {step === 1 && (
-            <>
+            <div className={s.step1}>
               <span>
                 <IoMdImages />
               </span>
@@ -116,7 +123,7 @@ const CreatingPublication = () => {
                   required
                 />
               </form>
-            </>
+            </div>
           )}
 
           {step === 2 && (
@@ -135,8 +142,8 @@ const CreatingPublication = () => {
                   <Image
                     src={URL.createObjectURL(file)}
                     alt={`Uploaded image ${index + 1}`}
-                    width={500}
-                    height={500}
+                    width={3000}
+                    height={3000}
                     className={s.previewImage}
                   />
                 </SwiperSlide>
@@ -147,13 +154,10 @@ const CreatingPublication = () => {
             <div className={s.box}>
               <div className={s.imgBlock}>
                 <Swiper
-                  // navigation={{
-                  //   hideOnClick: true,
-                  // }}
-                  pagination={{ clickable: true }} // Точки снизу
+                  pagination={{ clickable: true }}
                   modules={[Navigation, Pagination]}
                   slidesPerView={1}
-                  className={s.imageSlider}
+                  className={s.step3}
                 >
                   {files.map((file, index) => (
                     <SwiperSlide key={index}>
@@ -162,7 +166,7 @@ const CreatingPublication = () => {
                         alt={`Uploaded image ${index + 1}`}
                         width={500}
                         height={500}
-                        className={s.previewImage}
+                        className={s.foto3}
                       />
                     </SwiperSlide>
                   ))}
@@ -178,11 +182,10 @@ const CreatingPublication = () => {
                   />
                   <h2>{currentUser.username}</h2>
                 </div>
-                <textarea onChange={(e) => setText(e.target.value)}></textarea>
+                <EmojiInput text={text} setText={setText} />
                 <button onClick={handleSubmit(onSubmit)} type="submit">
                   share
                 </button>
-                <EmojiInput />
               </div>
             </div>
           )}
