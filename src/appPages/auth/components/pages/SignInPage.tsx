@@ -34,6 +34,7 @@ const SignInPage = () => {
 
       if (res) {
         localStorage.setItem("tokens", JSON.stringify(res));
+        router.refresh();
         router.push("/");
       }
     } catch (err: any) {

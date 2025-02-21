@@ -56,6 +56,7 @@ const SignUpPage = () => {
           const res = await registerFunc(data);
           if (res) {
             localStorage.setItem("tokens", JSON.stringify(res.data));
+            router.refresh();
             router.push("/");
           }
         } catch (error) {
