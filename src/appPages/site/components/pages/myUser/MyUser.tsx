@@ -1,12 +1,12 @@
 "use client";
-
 import { useLogOutMutation, useUserQuery } from "@/redux/api/auth";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import s from "./MyUser.module.scss";
 import Image from "next/image";
-import { useUserByIdQuery } from "@/redux/api/createPost";
 import user from "@/assets/user.png";
+import { useUserByIdQuery } from "@/redux/api/user";
+
 const MyUser = () => {
   const { data: users } = useUserQuery();
   const [logoutUser] = useLogOutMutation();
@@ -50,6 +50,11 @@ const MyUser = () => {
             <h3>{data?.username}</h3>
             <button>Edit profile</button>
           </div>
+        </div>
+        <div>
+          {data?.post.map((item) => (
+            <div key={item.id}>{item.count_like}</div>
+          ))}
         </div>
       </div>
 
