@@ -1,0 +1,37 @@
+.MyUser {
+  .content {
+    .header {
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      gap: 30px;
+      .blockImg {
+      }
+      .blockText {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: 20px;
+        button {
+          padding: 5px 15px;
+          border-radius: 8px;
+          border: 1px solid gray;
+          color: black;
+        }
+      }
+    }
+    .posts {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      flex-wrap: wrap;
+      gap: 10px;
+      .post {
+        object-fit: cover;
+        cursor: pointer;
+      }
+    }
+    .box {
+    }
+  }
+}
