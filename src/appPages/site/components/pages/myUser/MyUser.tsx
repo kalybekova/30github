@@ -47,9 +47,25 @@ const MyUser = () => {
             />
           </div>
           <div className={s.blockText}>
-            <h3>{data?.username}</h3>
-            <button>Edit profile</button>
-            <button onClick={handleLogout}>Logout</button>
+            <div className={s.title}>
+              <h3>{data?.username}</h3>
+              <button>Edit profile</button>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+            <div className={s.follower}>
+              <h5>
+                <span>{data?.post.length} </span>posts
+              </h5>
+              <h5>
+                <span>41 </span>followers
+              </h5>
+              <h5>
+                <span>99 </span>following
+              </h5>
+            </div>
+            <div className={s.about}>
+              <h4>{data?.bio}</h4>
+            </div>
           </div>
         </div>
         <div className={s.posts}>
@@ -65,10 +81,6 @@ const MyUser = () => {
             </div>
           ))}
         </div>
-      </div>
-
-      <div className={s.box}>
-        <div className={s.publication}></div>
       </div>
     </section>
   );
