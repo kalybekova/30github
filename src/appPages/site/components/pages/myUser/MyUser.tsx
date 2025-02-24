@@ -15,6 +15,7 @@ const MyUser = () => {
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
   const { data } = useUserByIdQuery(Number(currentUser.id));
+  console.log("🚀 ~ MyUser ~ data:", data);
 
   const handleLogout = async () => {
     const tokens = localStorage.getItem("tokens");
@@ -48,11 +49,20 @@ const MyUser = () => {
           <div className={s.blockText}>
             <h3>{data?.username}</h3>
             <button>Edit profile</button>
+            <button onClick={handleLogout}>Logout</button>
           </div>
         </div>
-        <div>
+        <div className={s.posts}>
           {data?.post.map((item) => (
-            <div key={item.id}>{item.count_like}</div>
+            <div key={item.id} className={s.post}>
+              <Image
+                src={`http://13.61.17.230${item?.post_connect?.post_img1}`}
+                alt="Фото"
+                width={300}
+                height={300}
+                unoptimized
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -60,8 +70,6 @@ const MyUser = () => {
       <div className={s.box}>
         <div className={s.publication}></div>
       </div>
-      {currentUser ? currentUser?.username : "anonim"}
-      <button onClick={handleLogout}>Logout</button>
     </section>
   );
 };
