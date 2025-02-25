@@ -49,7 +49,9 @@ const MyUser = () => {
           <div className={s.blockText}>
             <div className={s.title}>
               <h3>{data?.username}</h3>
-              <button>Edit profile</button>
+              <button onClick={() => router.push("edit-profile")}>
+                Edit profile
+              </button>
               <button onClick={handleLogout}>Logout</button>
             </div>
             <div className={s.follower}>

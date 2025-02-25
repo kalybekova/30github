@@ -96,3 +96,15 @@ interface UserById {
     count_like: number;
   }>;
 }
+
+interface PatchUser {
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  status_acc: string;
+  age: string;
+  bio: string;
+  gender: string;
+}

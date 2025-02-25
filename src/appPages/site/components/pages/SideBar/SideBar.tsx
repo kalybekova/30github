@@ -86,7 +86,12 @@ const SideBar = () => {
           <div className={s.block}>
             <span>
               {currentUser?.profile_picture ? (
-                <Image src={currentUser.profile_picture} alt="photo" />
+                <Image
+                  src={`${currentUser?.profile_picture}` || user}
+                  alt="photo"
+                  width={30}
+                  height={30}
+                />
               ) : (
                 <Image src={user} alt="photo" width={25} height={25} />
               )}

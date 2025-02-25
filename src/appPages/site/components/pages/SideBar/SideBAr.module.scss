@@ -27,6 +27,10 @@
         font-size: 18px;
         font-weight: 400;
       }
+      img {
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
     .block:hover {
       background: rgba(194, 191, 191, 0.497);
