@@ -1,6 +1,6 @@
 "use client";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
-import { useUserByIdQuery } from "@/redux/api/user";
+import { useEditProfileMutation, useUserByIdQuery } from "@/redux/api/user";
 import { useUserQuery } from "@/redux/api/auth";
 import Image from "next/image";
 import s from "./EditProfile.module.scss";
@@ -13,7 +13,8 @@ const EditProfile = () => {
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
   const { data } = useUserByIdQuery(Number(currentUser.id));
-  console.log("🚀 ~ MyUser ~ data:", data);
+  const [editProfile] = useEditProfileMutation();
+
   const { register, handleSubmit } = useForm<PatchUser>();
 
   const onSubmit: SubmitHandler<PatchUser> = async (data) => {
@@ -39,7 +40,17 @@ const EditProfile = () => {
             <button>Change photo</button>
           </div>
           <div className={s.bio}>
+            <input type="text" placeholder="first name" />
+          </div>
+          <div className={s.bio}>
             <textarea></textarea>
+          </div>
+          <div>
+            <select>
+              <option>Prefer not to say</option>
+              <option>Female</option>
+              <option>Male</option>
+            </select>
           </div>
         </form>
       </div>

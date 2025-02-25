@@ -9,7 +9,16 @@ const api = index.injectEndpoints({
       }),
       providesTags: ["post"],
     }),
+
+    editProfile: build.mutation<Post.EditRes, Post.EditReq>({
+      query: ({ data, id }) => ({
+        url: `/user/updated/${id}/`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["post"],
+    }),
   }),
 });
 
-export const { useUserByIdQuery } = api;
+export const { useUserByIdQuery, useEditProfileMutation } = api;
