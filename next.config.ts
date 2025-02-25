@@ -5,7 +5,7 @@ const nextConfig = {
       {
         protocol: "http",
         hostname: "13.61.17.230",
-        pathname: "/media/post_img/**",
+        pathname: "/media/profile_img/**",
       },
     ],
   },
