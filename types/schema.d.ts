@@ -107,4 +107,5 @@ interface PatchUser {
   age: string;
   bio: string;
   gender: string;
+  profile_picture: any;
 }
