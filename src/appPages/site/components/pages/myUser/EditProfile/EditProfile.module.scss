@@ -1,0 +1,98 @@
+.EditProfile {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .content {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 30px;
+    h1 {
+      font-size: 25px;
+      font-weight: 500;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      .myProfile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        background: rgba(187, 187, 187, 0.719);
+        width: 500px;
+        padding: 20px;
+        border-radius: 12px;
+
+        .block {
+          display: flex;
+          gap: 15px;
+          align-items: center;
+          img {
+            border-radius: 50%;
+          }
+          .title {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            h4 {
+              font-weight: 600;
+            }
+            h5 {
+              color: rgb(97, 96, 96);
+            }
+          }
+        }
+        label {
+          cursor: pointer;
+          background: rgb(24, 124, 201);
+          padding: 10px;
+          border-radius: 10px;
+          border: none;
+          color: white;
+          font-weight: 400;
+        }
+      }
+      .bio {
+        width: 500px;
+        border: 1px solid rgb(195, 193, 193);
+        border-radius: 12px;
+        padding: 20px;
+        input {
+          width: 100%;
+          border: none;
+          outline: none;
+        }
+        textarea {
+          width: 100%;
+          border: none;
+          outline: none;
+          height: 100%;
+        }
+      }
+      .select {
+        width: 500px;
+        border: 1px solid rgb(195, 193, 193);
+        padding: 20px;
+        border-radius: 12px;
+
+        select {
+          width: 100%;
+          border: none;
+          outline: none;
+        }
+      }
+      button {
+        padding: 20px;
+        color: white;
+        background: rgb(24, 124, 201);
+        border-radius: 12px;
+        border: none;
+        font-weight: 600;
+        font-size: 15px;
+      }
+    }
+  }
+}

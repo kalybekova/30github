@@ -3,7 +3,6 @@ import s from "./CreatingPublication.module.scss";
 import { IoMdImages } from "react-icons/io";
 import ReactDOM from "react-dom";
 import { useModal } from "@/provider/modalProvider";
-import CreatePost from "../CreatePost";
 import { useRef, useState } from "react";
 import { useUserQuery } from "@/redux/api/auth";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
@@ -42,17 +41,13 @@ const CreatingPublication = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setFiles(Array.from(event.target.files));
-      setStep(2); // Переход на следующий шаг
+      setStep(2);
     } else {
       alert("Please select at least one image.");
     }
   };
   const handleFileClick = () => {
     fileInputRef.current?.click();
-  };
-
-  const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
   };
 
   const onSubmit: SubmitHandler<Post> = async () => {
