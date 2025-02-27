@@ -8,18 +8,30 @@ const baseQuery = fetchBaseQuery({
   baseUrl: `${process.env.NEXT_PUBLIC_API_URL}`,
   prepareHeaders: (headers, { getState }) => {
     const tokens = localStorage.getItem("tokens");
+
     if (tokens) {
-      const accessToken = JSON.parse(tokens).access;
-      if (accessToken) {
-        headers.set("Authorization", `Bearer ${accessToken}`);
+      const { access, refresh, expiration } = JSON.parse(tokens);
+      const currentTime = Date.now();
+
+      if (expiration && currentTime > expiration) {
+        localStorage.clear();
+      } else if (access) {
+        headers.set("Authorization", `Bearer ${access}`);
       }
     }
+
     return headers;
   },
 });
 
 const baseQueryExtended: BaseQueryFn = async (args, api, extraOptions) => {
   const res = await baseQuery(args, api, extraOptions);
+
+  // Если есть ошибка авторизации (например, токен не действителен), очищаем localStorage
+  if (res.error?.status === 401) {
+    localStorage.clear();
+  }
+
   return res;
 };
 
