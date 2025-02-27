@@ -21,7 +21,6 @@ import user from "@/assets/user.png";
 import EmojiInput from "@/ui/Emoji/Emoji";
 
 const CreatingPublication = () => {
-  const { openModal } = useModal();
   const { data: users } = useUserQuery();
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
@@ -29,7 +28,7 @@ const CreatingPublication = () => {
   const [postContentMut] = usePostContentMutation<Post>();
   const [postTextMut] = usePostPostCreateMutation<PostText>();
 
-  const { handleSubmit, register } = useForm<Post>();
+  const { handleSubmit } = useForm<Post>();
 
   const [files, setFiles] = useState<File[]>([]);
   const [text, setText] = useState<string>("");

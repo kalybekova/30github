@@ -7,14 +7,15 @@ import { useEditProfileMutation, useUserByIdQuery } from "@/redux/api/user";
 import Image from "next/image";
 import user from "@/assets/user.png";
 import s from "./EditProfile.module.scss";
+import { useRouter } from "next/navigation";
 
 const EditProfile = () => {
   const { data: users } = useUserQuery();
-
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
   const { data } = useUserByIdQuery(Number(currentUser.id));
   const [editProfile] = useEditProfileMutation();
+  const router = useRouter();
 
   const { register, handleSubmit, setValue, watch } = useForm<PatchUser>({
     defaultValues: {
@@ -59,7 +60,8 @@ const EditProfile = () => {
         id: Number(currentUser.id),
         data: formDataToSend,
       }).unwrap();
-      console.log("Profile updated successfully");
+      alert("Profile updated successfully");
+      router.push(`/${currentUser.id}`);
     } catch (error) {
       console.error("Ошибка при обновлении профиля:", error);
     }
