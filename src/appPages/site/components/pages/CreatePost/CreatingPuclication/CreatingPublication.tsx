@@ -19,8 +19,12 @@ import { Navigation, Pagination } from "swiper/modules";
 import user from "@/assets/user.png";
 import EmojiInput from "@/ui/Emoji/Emoji";
 import { useUserQuery } from "@/redux/api/user";
+import { useRouter } from "next/navigation";
 
 const CreatingPublication = () => {
+  const { closeModal } = useModal();
+
+  const router = useRouter();
   const { data: users } = useUserQuery();
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
@@ -64,7 +68,6 @@ const CreatingPublication = () => {
       });
 
       const postResponse = await postContentMut(formData).unwrap();
-      console.log("Post created successfully:", postResponse);
 
       const postTextResponse = await postTextMut({
         post_connect: postResponse.id,
@@ -74,6 +77,8 @@ const CreatingPublication = () => {
       console.log("Text post created successfully:", postTextResponse);
 
       alert("Post created successfully!");
+      closeModal();
+      router.push(`/${currentUser}`);
     } catch (error: any) {
       console.error("Error:", error);
       alert("Error occurred. Check console.");
