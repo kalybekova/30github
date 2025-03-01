@@ -1,0 +1,52 @@
+.RecommendFollower {
+  width: 100%;
+  display: flex;
+
+  margin: 30px 250px;
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 500px;
+    width: 100%;
+    .head {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h2 {
+        font-size: 17px;
+        font-weight: 500;
+        color: rgb(104, 103, 103);
+      }
+    }
+    .block {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .blockLeft {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        cursor: pointer;
+        img {
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      button {
+        color: rgb(40, 85, 232);
+        font-weight: 500;
+        font-size: 12px;
+
+        background: transparent;
+        border: none;
+        outline: none;
+      }
+    }
+  }
+}

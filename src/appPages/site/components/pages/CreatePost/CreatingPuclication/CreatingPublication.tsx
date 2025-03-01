@@ -4,7 +4,6 @@ import { IoMdImages } from "react-icons/io";
 import ReactDOM from "react-dom";
 import { useModal } from "@/provider/modalProvider";
 import { useRef, useState } from "react";
-import { useUserQuery } from "@/redux/api/auth";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
 import {
   usePostContentMutation,
@@ -19,6 +18,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import user from "@/assets/user.png";
 import EmojiInput from "@/ui/Emoji/Emoji";
+import { useUserQuery } from "@/redux/api/user";
 
 const CreatingPublication = () => {
   const { data: users } = useUserQuery();

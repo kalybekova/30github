@@ -1,4 +1,4 @@
-namespace Post {
+namespace User {
   type UserByIdRes = UserById;
   type UserByIdReq = number;
 
@@ -7,4 +7,7 @@ namespace Post {
     data: PatchUser;
     id: number;
   };
+
+  type UserListRes = UserList[];
+  type UserListReq = void;
 }
