@@ -45,6 +45,7 @@ const EmojiInput = ({
         display: "inline-block",
         zIndex: 30,
         width: "100% ",
+        marginTop: "30px",
       }}
     >
       <textarea
