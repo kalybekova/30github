@@ -11,11 +11,11 @@ import { TbMessageCirclePlus } from "react-icons/tb";
 import Image from "next/image";
 import logo from "@/assets/Instagram Logo.svg";
 import Link from "next/link";
-import { useUserQuery } from "@/redux/api/auth";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
 import user from "@/assets/user.png";
 import { useModal } from "@/provider/modalProvider";
 import CreatingPublication from "../CreatePost/CreatingPuclication/CreatingPublication";
+import { useUserQuery } from "@/redux/api/user";
 
 const arr = [
   {

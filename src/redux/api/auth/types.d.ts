@@ -10,7 +10,4 @@ namespace Auth {
     refresh: string;
   };
   type RegistenReq = Register;
-
-  type UserListRes = UserList[];
-  type UserListReq = void;
 }

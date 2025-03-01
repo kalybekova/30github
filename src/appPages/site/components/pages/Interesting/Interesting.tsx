@@ -2,6 +2,7 @@
 import { useModal } from "@/provider/modalProvider";
 import s from "./Interesting.module.scss";
 import { useGetAllPostQuery } from "@/redux/api/createPost";
+import ModalDetail from "../modalDetail/ModalDetail";
 
 const Interesting = () => {
   const { data } = useGetAllPostQuery();
@@ -13,9 +14,9 @@ const Interesting = () => {
           <div
             key={item.id}
             className={s.block}
-            onClick={() => openModal(`/interesting/${item.id}`)}
+            onClick={() => openModal(<ModalDetail />)}
           >
-            <img src={item.post_connect.post_img1} alt="" />
+            <img src={item.post_connect.post_img1} alt="photos" />
           </div>
         ))}
       </div>

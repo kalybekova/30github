@@ -1,9 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useUserQuery } from "@/redux/api/auth";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
-import { useEditProfileMutation, useUserByIdQuery } from "@/redux/api/user";
+import {
+  useEditProfileMutation,
+  useUserByIdQuery,
+  useUserQuery,
+} from "@/redux/api/user";
 import Image from "next/image";
 import user from "@/assets/user.png";
 import s from "./EditProfile.module.scss";
@@ -67,6 +70,14 @@ const EditProfile = () => {
     }
   };
 
+  useEffect(() => {
+    return () => {
+      if (selectedFile) {
+        URL.revokeObjectURL(URL.createObjectURL(selectedFile));
+      }
+    };
+  }, [selectedFile]);
+
   return (
     <section className={s.EditProfile}>
       <div className={s.content}>
@@ -75,7 +86,11 @@ const EditProfile = () => {
           <div className={s.myProfile}>
             <div className={s.block}>
               <Image
-                src={data?.profile_picture || user}
+                src={
+                  selectedFile
+                    ? URL.createObjectURL(selectedFile)
+                    : data?.profile_picture || user
+                }
                 alt="photo"
                 width={50}
                 height={50}

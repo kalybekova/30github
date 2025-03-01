@@ -1,7 +1,7 @@
 "use client";
-import { useLogOutMutation, useUserQuery } from "@/redux/api/auth";
+import { useLogOutMutation } from "@/redux/api/auth";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
-import { useUserByIdQuery } from "@/redux/api/user";
+import { useUserByIdQuery, useUserQuery } from "@/redux/api/user";
 import { useRouter } from "next/navigation";
 import s from "./MyUser.module.scss";
 import Image from "next/image";

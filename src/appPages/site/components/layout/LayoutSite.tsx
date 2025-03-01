@@ -2,10 +2,10 @@
 import { FC, ReactNode } from "react";
 import scss from "./LayoutSite.module.scss";
 import SideBar from "../pages/SideBar/SideBar";
-import { useUserQuery } from "@/redux/api/auth";
 import SignInPage from "@/appPages/auth/components/pages/SignInPage";
 import { getUserData, findCurrentUser } from "@/utils/MyData";
 import { ModalProvider } from "@/provider/modalProvider";
+import { useUserQuery } from "@/redux/api/user";
 
 interface IProps {
   children: ReactNode;
