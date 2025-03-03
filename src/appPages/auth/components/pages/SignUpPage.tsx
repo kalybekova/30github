@@ -1,13 +1,14 @@
 "use client";
-import { useRegisterMutation, useUserQuery } from "@/redux/api/auth";
 import s from "./SignUpPage.module.scss";
+import { useRegisterMutation } from "@/redux/api/auth";
 import { SubmitHandler, useForm } from "react-hook-form";
-import Image from "next/image";
+import { useUserQuery } from "@/redux/api/user";
 import { useState } from "react";
-import logo from "@/assets/Instagram Logo.svg";
 import { useRouter } from "next/navigation";
 import { MdArrowBackIos } from "react-icons/md";
+import logo from "@/assets/Instagram Logo.svg";
 import Link from "next/link";
+import Image from "next/image";
 
 const SignUpPage = () => {
   const [registerFunc] = useRegisterMutation();
@@ -29,12 +30,11 @@ const SignUpPage = () => {
   if (tokens) {
     try {
       const parsedTokens = JSON.parse(tokens);
-      accessToken = parsedTokens.access; // Сохраняем access токен для запроса
+      accessToken = parsedTokens.access;
       const decodedAccessToken = JSON.parse(
         atob(parsedTokens.access.split(".")[1])
       );
       userId = decodedAccessToken?.user_id;
-      console.log("🚀 ~ userId:", userId);
     } catch (error) {
       console.error("Ошибка при декодировании токена:", error);
     }
@@ -51,7 +51,6 @@ const SignUpPage = () => {
         setError("You must be at least 13 years old to sign up.");
       } else {
         setError(null);
-        console.log("🚀 ~ User data:", data);
         try {
           const res = await registerFunc(data);
           if (res) {

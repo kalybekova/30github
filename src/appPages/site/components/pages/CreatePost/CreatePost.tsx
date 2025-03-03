@@ -6,8 +6,8 @@ import {
 import s from "./CreatePost.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
-import { useUserQuery } from "@/redux/api/auth";
 import { useState } from "react";
+import { useUserQuery } from "@/redux/api/user";
 
 const CreatePost = () => {
   const { data: users } = useUserQuery();
@@ -49,12 +49,10 @@ const CreatePost = () => {
       const postResponse = await postContentMut(formData).unwrap();
       console.log("Post created successfully:", postResponse);
 
-      // Теперь отправляем текстовое описание
       const postTextResponse = await postTextMut({
         post_connect: postResponse.id,
         text: text,
       }).unwrap();
-      console.log("Text post created successfully:", postTextResponse);
 
       alert("Post created successfully!");
     } catch (error: any) {
@@ -75,7 +73,6 @@ const CreatePost = () => {
             placeholder="Add a description"
             required
           />
-
           <button type="submit">Share</button>
         </form>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 import s from "./CreatingPublication.module.scss";
-import { IoMdImages } from "react-icons/io";
 import ReactDOM from "react-dom";
+import { IoMdImages } from "react-icons/io";
 import { useModal } from "@/provider/modalProvider";
 import { useRef, useState } from "react";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
@@ -9,17 +9,17 @@ import {
   usePostContentMutation,
   usePostPostCreateMutation,
 } from "@/redux/api/createPost";
+import { useUserQuery } from "@/redux/api/user";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
-import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import user from "@/assets/user.png";
 import EmojiInput from "@/ui/Emoji/Emoji";
-import { useUserQuery } from "@/redux/api/user";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const CreatingPublication = () => {
   const { closeModal } = useModal();
@@ -74,7 +74,6 @@ const CreatingPublication = () => {
         text: text,
         author: currentUser.id,
       }).unwrap();
-      console.log("Text post created successfully:", postTextResponse);
 
       alert("Post created successfully!");
       closeModal();
@@ -127,10 +126,6 @@ const CreatingPublication = () => {
 
           {step === 2 && (
             <Swiper
-              // navigation={{
-              //   hideOnClick: true,
-              // }}
-              // navigation
               pagination={{ clickable: true }} // Точки снизу
               modules={[Navigation, Pagination]}
               slidesPerView={1}
