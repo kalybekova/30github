@@ -26,8 +26,6 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryExtended: BaseQueryFn = async (args, api, extraOptions) => {
   const res = await baseQuery(args, api, extraOptions);
-
-  // Если есть ошибка авторизации (например, токен не действителен), очищаем localStorage
   if (res.error?.status === 401) {
     localStorage.clear();
   }
@@ -38,7 +36,6 @@ const baseQueryExtended: BaseQueryFn = async (args, api, extraOptions) => {
 export const api = createApi({
   reducerPath: "api",
   baseQuery: baseQueryExtended,
-
   refetchOnFocus: true,
   refetchOnReconnect: true,
   tagTypes: ["auth", "post"],
