@@ -16,6 +16,8 @@ import user from "@/assets/user.png";
 import { useModal } from "@/provider/modalProvider";
 import CreatingPublication from "../CreatePost/CreatingPuclication/CreatingPublication";
 import { useUserQuery } from "@/redux/api/user";
+import { useState } from "react";
+import Search from "../Search/Search";
 
 const arr = [
   {
@@ -28,7 +30,8 @@ const arr = [
     icon: <IoIosSearch />,
     text: "Search query",
     active: false,
-    path: "/search",
+    path: "",
+    openSearch: true,
   },
   {
     icon: <SlCompass />,
@@ -70,18 +73,32 @@ const SideBar = () => {
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
 
+  const [isSearchOpen, setSearchOpen] = useState(false);
+
   return (
     <section className={s.SideBar}>
       <div className={s.content}>
         <Image src={logo} alt="logo" />
-        {arr.map((el, idx) => (
-          <Link key={idx} href={el.path}>
-            <div className={s.block} onClick={() => openModal(el.modal)}>
+        {arr.map((el, idx) =>
+          el.text === "Search query" ? (
+            <div
+              key={idx}
+              onClick={() => setSearchOpen(true)}
+              className={s.block}
+            >
               <span>{el.icon}</span>
               <h2>{el.text}</h2>
             </div>
-          </Link>
-        ))}
+          ) : (
+            <Link key={idx} href={el.path}>
+              <div className={s.block} onClick={() => openModal(el.modal)}>
+                <span>{el.icon}</span>
+                <h2>{el.text}</h2>
+              </div>
+            </Link>
+          )
+        )}
+
         <Link href={`/${currentUser.id}`}>
           <div className={s.block}>
             <span>
@@ -101,6 +118,7 @@ const SideBar = () => {
           </div>
         </Link>
       </div>
+      {isSearchOpen && <Search onClose={() => setSearchOpen(false)} />}
     </section>
   );
 };
