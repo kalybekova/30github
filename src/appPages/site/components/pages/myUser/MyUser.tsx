@@ -33,6 +33,7 @@ const MyUser = () => {
       console.error("Ошибка при выходе:", error);
     }
   };
+
   return (
     <section className={s.MyUser}>
       <div className={s.content}>
