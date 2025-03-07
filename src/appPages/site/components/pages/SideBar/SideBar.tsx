@@ -14,7 +14,7 @@ import Link from "next/link";
 import { findCurrentUser, getUserData } from "@/utils/MyData";
 import user from "@/assets/user.png";
 import { useModal } from "@/provider/modalProvider";
-import CreatingPublication from "../CreatePost/CreatingPuclication/CreatingPublication";
+import CreatingPublication from "../CreatePost/CreatingPublication";
 import { useUserQuery } from "@/redux/api/user";
 import { useState } from "react";
 import Search from "../Search/Search";
