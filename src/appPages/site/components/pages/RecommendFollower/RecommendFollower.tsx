@@ -1,12 +1,19 @@
+"use client";
 import { useUserQuery } from "@/redux/api/user";
 import s from "./RecommendFollower.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import user from "@/assets/user.png";
+import { useMemo } from "react";
 
 const RecommendFollower = () => {
   const { data: users } = useUserQuery();
-  console.log("🚀 ~ Stories ~ data:", users);
+
+  const randomUsers = useMemo(() => {
+    if (!users) return [];
+    return [...users].sort(() => Math.random() - 0.5).slice(0, 5);
+  }, [users]);
+
   return (
     <section className={s.RecommendFollower}>
       <div className={s.content}>
@@ -15,7 +22,7 @@ const RecommendFollower = () => {
           <Link href="/recommend-followers">See all</Link>
         </div>
 
-        {users?.slice(0, 5).map((item) => (
+        {randomUsers.map((item) => (
           <div className={s.block} key={item.id}>
             <div className={s.blockLeft}>
               <Image
