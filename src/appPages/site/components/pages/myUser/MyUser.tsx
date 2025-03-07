@@ -76,8 +76,8 @@ const MyUser = () => {
               <Image
                 src={`http://13.61.17.230${item?.post_connect?.post_img1}`}
                 alt="Фото"
-                width={300}
-                height={300}
+                width={3000}
+                height={3000}
                 unoptimized
               />
             </div>

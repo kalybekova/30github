@@ -133,13 +133,14 @@ const CreatingPublication = () => {
             >
               {files.map((file, index) => (
                 <SwiperSlide key={index}>
-                  <Image
-                    src={URL.createObjectURL(file)}
-                    alt={`Uploaded image ${index + 1}`}
-                    width={3000}
-                    height={3000}
-                    className={s.previewImage}
-                  />
+                  <div className={s.imageWrapper}>
+                    <Image
+                      src={URL.createObjectURL(file)}
+                      alt={`Uploaded image ${index + 1}`}
+                      fill
+                      className={s.previewImage}
+                    />
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>

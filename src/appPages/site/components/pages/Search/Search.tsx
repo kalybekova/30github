@@ -74,8 +74,14 @@ const Search = ({ onClose }: any) => {
                 )
               ) : recentList.length ? (
                 recentList.map((user) => (
-                  <div key={user.id} className={s.listItem}>
-                    {user.username}
+                  <div key={user.id} className={s.resultItem}>
+                    <Image
+                      src={user.profile_picture || userr}
+                      alt="avatar"
+                      width={50}
+                      height={50}
+                    />
+                    <h6> {user.username}</h6>
                   </div>
                 ))
               ) : (
