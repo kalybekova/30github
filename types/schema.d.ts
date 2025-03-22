@@ -109,3 +109,29 @@ interface PatchUser {
   gender: string;
   profile_picture: any;
 }
+
+interface DetailPost {
+  id: number;
+  author: {
+    id: number;
+    username: string;
+    profile_picture: any;
+  };
+  post_connect: {
+    id: number;
+    post_img1: string;
+    post_img2: any;
+    post_img3: any;
+    post_img4: any;
+    post_img5: any;
+    post_img6: any;
+    post_img7: any;
+    post_img8: any;
+    post_img9: any;
+    post_img10: any;
+  };
+  text: string;
+  created_date: string;
+  comment: Array<any>;
+  count_like: number;
+}

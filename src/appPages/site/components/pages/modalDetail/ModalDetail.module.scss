@@ -10,5 +10,10 @@
   justify-content: center;
   align-items: center;
   .content {
+    .previewImage {
+      opacity: 1;
+      visibility: visible;
+      display: block;
+    }
   }
 }

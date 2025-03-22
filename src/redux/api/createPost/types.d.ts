@@ -26,4 +26,7 @@ namespace Post {
 
   type UserByIdRes = UserById;
   type UserByIdReq = number;
+
+  type DetailPostRes = DetailPost;
+  type DetailPostReq = number;
 }
