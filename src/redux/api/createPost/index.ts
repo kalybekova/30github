@@ -2,7 +2,7 @@ import { api as index } from "..";
 
 const api = index.injectEndpoints({
   endpoints: (build) => ({
-    postPostCreate: build.mutation<Post.PostCreateRes, PostCreateReq>({
+    postPostCreate: build.mutation<Post.PostCreateRes, Post.PostCreateReq>({
       query: (data) => ({
         url: "/post/post_create/",
         method: "POST",
@@ -27,6 +27,14 @@ const api = index.injectEndpoints({
       }),
       providesTags: ["post"],
     }),
+
+    getPostDetail: build.query({
+      query: (id) => ({
+        url: `/post/post_detail/${id}/`,
+        method: "GET",
+      }),
+      providesTags: ["post"],
+    }),
   }),
 });
 
@@ -34,4 +42,5 @@ export const {
   usePostPostCreateMutation,
   useGetAllPostQuery,
   usePostContentMutation,
+  useGetPostDetailQuery,
 } = api;

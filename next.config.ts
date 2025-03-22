@@ -4,8 +4,18 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "13.61.17.230",
+        hostname: "13.60.43.43",
         pathname: "/media/profile_img/**",
+      },
+      {
+        protocol: "http",
+        hostname: "13.60.43.43",
+        pathname: "/media/post_img/**",
+      },
+      {
+        protocol: "http",
+        hostname: "13.60.43.43",
+        pathname: "/media/**",
       },
     ],
   },

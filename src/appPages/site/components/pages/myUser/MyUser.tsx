@@ -15,6 +15,7 @@ const MyUser = () => {
   const { userId } = getUserData();
   const currentUser = findCurrentUser(users, userId);
   const { data } = useUserByIdQuery(Number(currentUser.id));
+  console.log("🚀 ~ MyUser ~ data:", data);
 
   const handleLogout = async () => {
     const tokens = localStorage.getItem("tokens");
@@ -74,11 +75,12 @@ const MyUser = () => {
           {data?.post.map((item) => (
             <div key={item.id} className={s.post}>
               <Image
-                src={`http://13.61.17.230${item?.post_connect?.post_img1}`}
-                alt="Фото"
-                width={3000}
-                height={3000}
+                src={`http://13.60.43.43/${item?.post_connect?.post_img1}`}
+                alt={`http://13.60.43.43/${item?.post_connect?.post_img1}`}
+                width={500}
+                height={300}
                 unoptimized
+                priority
               />
             </div>
           ))}
