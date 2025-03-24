@@ -75,8 +75,8 @@ const MyUser = () => {
           {data?.post.map((item) => (
             <div key={item.id} className={s.post}>
               <Image
-                src={`http://13.60.43.43/${item?.post_connect?.post_img1}`}
-                alt={`http://13.60.43.43/${item?.post_connect?.post_img1}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}${item?.post_connect?.post_img1}`}
+                alt={`фото${item?.post_connect?.post_img1}`}
                 width={500}
                 height={300}
                 unoptimized

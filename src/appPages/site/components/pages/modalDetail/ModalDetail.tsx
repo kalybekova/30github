@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
 
-const ModalDetail = ({ postId }) => {
+const ModalDetail = ({ postId }: any) => {
   const { data, isLoading, error } = useGetPostDetailQuery(postId);
   console.log("🚀 ~ ModalDetail ~ data:", data);
 
@@ -16,18 +16,25 @@ const ModalDetail = ({ postId }) => {
   if (error) return <p>Ошибка загрузки</p>;
   if (!data) return <p>Данных нет</p>;
 
-  // Создаем массив изображений (добавляем http:// если его нет)
-  const images = Object.values(data.post_connect)
-    .filter((img) => typeof img === "string" && img.trim() !== "")
-    .map((img) => (img.startsWith("http") ? img : `http://13.61.17.230${img}`));
-
-  console.log("🚀 ~ Images:", images); // Проверяем в консоли
+  const images = [
+    data.post_connect.post_img1,
+    data.post_connect.post_img2,
+    data.post_connect.post_img3,
+    data.post_connect.post_img4,
+    data.post_connect.post_img5,
+    data.post_connect.post_img6,
+    data.post_connect.post_img7,
+    data.post_connect.post_img8,
+    data.post_connect.post_img9,
+    data.post_connect.post_img10,
+  ].filter(Boolean);
+  console.log("🚀 ~ ModalDetail ~ images:", images);
 
   return (
     <section className={s.modal}>
       <div className={s.content}>
         <Swiper
-          pagination={{ clickable: true }}
+          pagination={{ clickable: true, dynamicBullets: true }}
           navigation
           modules={[Navigation, Pagination]}
           slidesPerView={1}
@@ -40,8 +47,6 @@ const ModalDetail = ({ postId }) => {
                   src={img}
                   alt={`Фото ${index + 1}`}
                   className={s.previewImage}
-                  width="500"
-                  height="500"
                 />
               </div>
             </SwiperSlide>
