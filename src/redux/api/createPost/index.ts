@@ -28,7 +28,7 @@ const api = index.injectEndpoints({
       providesTags: ["post"],
     }),
 
-    getPostDetail: build.query({
+    getPostDetail: build.query<Post.DetailPostRes, Post.DetailPostReq>({
       query: (id) => ({
         url: `/post/post_detail/${id}/`,
         method: "GET",
