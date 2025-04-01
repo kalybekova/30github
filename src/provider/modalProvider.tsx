@@ -31,19 +31,21 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ModalContext.Provider value={{ openModal, closeModal }}>
-      {children}
-      {modalContent &&
-        ReactDOM.createPortal(
-          <div className={scss.overlay} onClick={closeModal}>
-            <div className={scss.modal} onClick={(e) => e.stopPropagation()}>
-              {modalContent}
-              <button className={scss.closeButton} onClick={closeModal}>
-                ✖
-              </button>
-            </div>
-          </div>,
-          document.body
-        )}
+      <div className={scss.modaal}>
+        <main>{children}</main>
+        {modalContent &&
+          ReactDOM.createPortal(
+            <div className={scss.overlay} onClick={closeModal}>
+              <div className={scss.modal} onClick={(e) => e.stopPropagation()}>
+                {modalContent}
+                <button className={scss.closeButton} onClick={closeModal}>
+                  ✖
+                </button>
+              </div>
+            </div>,
+            document.body
+          )}
+      </div>
     </ModalContext.Provider>
   );
 };
