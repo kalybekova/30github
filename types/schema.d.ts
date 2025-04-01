@@ -115,23 +115,31 @@ interface DetailPost {
   author: {
     id: number;
     username: string;
-    profile_picture: any;
+    profile_picture: string;
   };
   post_connect: {
     id: number;
     post_img1: string;
-    post_img2: any;
-    post_img3: any;
-    post_img4: any;
-    post_img5: any;
-    post_img6: any;
-    post_img7: any;
-    post_img8: any;
-    post_img9: any;
-    post_img10: any;
+    post_img2: string;
+    post_img3: string;
+    post_img4: string;
+    post_img5: string;
+    post_img6: string;
+    post_img7: string;
+    post_img8: string;
+    post_img9: string;
+    post_img10: string;
   };
   text: string;
   created_date: string;
-  comment: Array<any>;
-  count_like: number;
+  comment: Array<{
+    id: number;
+    author: number;
+    text: string;
+    created_date: string;
+    parent_review: number;
+    post: number;
+    count_like: string;
+  }>;
+  count_like: string;
 }

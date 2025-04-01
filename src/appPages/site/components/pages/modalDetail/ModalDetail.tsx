@@ -6,9 +6,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import s from "./ModalDetail.module.scss";
+import user from "@/assets/user.png";
+import Image from "next/image";
 
 const ModalDetail = ({ postId }: any) => {
   const { data, isLoading, error } = useGetPostDetailQuery(postId);
+  console.log("🚀 ~ ModalDetail ~ data:", data);
 
   if (isLoading) return <p>Загрузка...</p>;
   if (error) return <p>Ошибка загрузки</p>;
@@ -23,22 +26,47 @@ const ModalDetail = ({ postId }: any) => {
     <section className={s.modal}>
       <div className={s.content}>
         {images.length > 0 ? (
-          <Swiper
-            modules={[Navigation, Pagination]}
-            navigation
-            pagination={{ clickable: true }}
-            className={s.swiper}
-          >
-            {images.map((img, index) => (
-              <SwiperSlide key={index} className={s.swiperSlide}>
-                <img
-                  src={img}
-                  alt={`Фото ${index + 1}`}
-                  className={s.previewImage}
+          <div className={s.block}>
+            <Swiper
+              modules={[Navigation, Pagination]}
+              navigation
+              pagination={{ clickable: true }}
+              className={s.swiper}
+            >
+              {images.map((img, index) => (
+                <SwiperSlide key={index} className={s.swiperSlide}>
+                  <img
+                    src={img}
+                    alt={`Фото ${index + 1}`}
+                    className={s.previewImage}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className={s.textBox}>
+              <div className={s.header}>
+                <Image
+                  src={user || data.author.profile_picture}
+                  alt="фото"
+                  width={25}
+                  height={25}
                 />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                <h3>{data.author.username}</h3>
+                <span>Follow</span>
+              </div>
+
+              <div className={s.commments}>
+                {data.comment.map((item) => (
+                  <Image
+                    src={user || item.author}
+                    alt="фото"
+                    width={25}
+                    height={25}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         ) : (
           <p>Нет изображений</p>
         )}
