@@ -19,7 +19,9 @@ const Interesting = () => {
           <div
             key={item.id}
             className={s.block}
-            onClick={() => handleOpenModal(item.id)}
+            onClick={() => {
+              handleOpenModal(item.id);
+            }}
           >
             <img src={item.post_connect.post_img1} alt="photos" />
           </div>
